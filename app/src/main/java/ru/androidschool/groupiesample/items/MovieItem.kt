@@ -1,21 +1,24 @@
 package ru.androidschool.groupiesample.items
 
+import android.view.View
 import com.squareup.picasso.Picasso
-import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
-import com.xwray.groupie.kotlinandroidextensions.Item
-import kotlinx.android.synthetic.main.item_square.*
-import kotlinx.android.synthetic.main.item_with_text.*
+import com.xwray.groupie.viewbinding.BindableItem
 import ru.androidschool.groupiesample.R
+import ru.androidschool.groupiesample.databinding.ItemWithTextBinding
 
-class MovieItem(private val content: MovieContent) : Item() {
+class MovieItem(private val content: MovieContent) : BindableItem<ItemWithTextBinding>() {
 
     override fun getLayout() = R.layout.item_with_text
 
-    override fun bind(viewHolder: GroupieViewHolder, position: Int) {
-        viewHolder.description.text = content.title
+    override fun bind(binding: ItemWithTextBinding, position: Int) {
+        binding.description.text = content.title
         Picasso.get()
             .load(content.url)
-            .into(viewHolder.image_preview)
+            .into(binding.imagePreview)
+    }
+
+    override fun initializeViewBinding(view: View): ItemWithTextBinding {
+        return ItemWithTextBinding.bind(view)
     }
 }
 

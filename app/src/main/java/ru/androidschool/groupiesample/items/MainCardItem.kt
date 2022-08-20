@@ -1,23 +1,27 @@
 package ru.androidschool.groupiesample.items
 
-import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
-import com.xwray.groupie.kotlinandroidextensions.Item
-import kotlinx.android.synthetic.main.item_card.*
+import android.view.View
+import com.xwray.groupie.GroupieAdapter
+import com.xwray.groupie.viewbinding.BindableItem
 import ru.androidschool.groupiesample.R
+import ru.androidschool.groupiesample.databinding.ItemCardBinding
 
 class MainCardContainer(
     private val title: String? = "",
     private val description: String? = "",
     private val onClick: (url: String) -> Unit,
-    private val items: List<Item>
-) : Item() {
+    private val items: List<BindableItem<*>>
+) : BindableItem<ItemCardBinding>() {
 
     override fun getLayout() = R.layout.item_card
 
-    override fun bind(viewHolder: GroupieViewHolder, position: Int) {
-        viewHolder.title_text_view.text = title
-        viewHolder.description_text_view.text = description
-        viewHolder.items_container.adapter = GroupAdapter<GroupieViewHolder>().apply { addAll(items) }
+    override fun bind(binding: ItemCardBinding, position: Int) {
+        binding.titleTextView.text = title
+        binding.descriptionTextView.text = description
+        binding.itemsContainer.adapter = GroupieAdapter().apply { addAll(items) }
+    }
+
+    override fun initializeViewBinding(view: View): ItemCardBinding {
+        return ItemCardBinding.bind(view)
     }
 }

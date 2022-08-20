@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 29
@@ -23,10 +22,9 @@ android {
         }
     }
 
-    androidExtensions {
-        experimental = true
+    viewBinding {
+        enabled true
     }
-
 }
 
 dependencies {
@@ -40,8 +38,9 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'com.xwray:groupie:2.8.0'
-    implementation 'com.xwray:groupie-kotlin-android-extensions:2.8.0'
+
+    implementation 'com.github.lisawray.groupie:groupie:2.10.0'
+    implementation "com.github.lisawray.groupie:groupie-viewbinding:2.10.0"
     implementation "androidx.recyclerview:recyclerview:1.1.0"
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'androidx.cardview:cardview:1.0.0'
