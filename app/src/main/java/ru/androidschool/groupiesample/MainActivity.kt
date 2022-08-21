@@ -25,9 +25,7 @@ class MainActivity : AppCompatActivity() {
             getPopularGames()
         )
 
-        val adapter = GroupieAdapter().apply { addAll(movies) }
-        binding.itemsContainer.layoutManager = LinearLayoutManager(this)
-        binding.itemsContainer.adapter = adapter
+        binding.itemsContainer.adapter = GroupieAdapter().apply { addAll(movies) }
     }
 
     private fun getPopularMovies(): BindableItem<ItemCardBinding> {
